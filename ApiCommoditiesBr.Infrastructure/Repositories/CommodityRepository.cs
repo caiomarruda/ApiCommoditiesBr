@@ -13,10 +13,12 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
     {
         private static readonly string cacheIndexName = "commodities";
         private readonly IConfiguration _configuration;
+        private static string _filePath; 
 
         public CommodityRepository(IConfiguration configuration, IMemoryCache memoryCache) : base(memoryCache)
         {
             _configuration = configuration;
+            _filePath = _configuration["CommoditiesUrl"];
         }
 
         public Products Get()
@@ -32,7 +34,7 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
         private Products GetFromSource()
         {
             var htmlWeb = new HtmlWeb();
-            var url = htmlWeb.Load(_configuration["CommoditiesUrl"]);
+            var url = htmlWeb.Load(_filePath);
 
             var lstProducts = new List<ProductItem>();
             ConvertDateToLocalDateTime(DateTime.Now, out DateTime dateNow);
