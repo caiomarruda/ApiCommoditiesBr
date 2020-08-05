@@ -12,22 +12,32 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
     {
         private static readonly string cacheIndexName = "commodities";
         private readonly IConfiguration _configuration;
-        private static string _filePath; 
+        
+        private static string _filePath;
+        private static bool _cacheEnabled;
+        private static int _cacheTtl;
 
         public CommodityRepository(IConfiguration configuration, IMemoryCache memoryCache) : base(memoryCache)
         {
             _configuration = configuration;
             _filePath = _configuration["CommoditiesUrl"];
+            _cacheEnabled = Convert.ToBoolean(_configuration["EnableCache"]);
+            _cacheTtl = Convert.ToInt32(_configuration["TtlCache"]);
         }
 
         public Products Get()
         {
-            var retValues = GetInMemoryCache<Products>(cacheIndexName);
+            if (_cacheEnabled)
+            {
+                _ = new Products();
 
-            if (retValues == null)
-                return SetInMemoryCache(GetFromSource(), cacheIndexName);
+                Products retProducts = GetInMemoryCache<Products>(cacheIndexName);
 
-            return retValues;
+                if (retProducts == null)
+                    return SetInMemoryCache(GetFromSource(), cacheIndexName, _cacheTtl);
+            }
+            
+            return GetFromSource();
         }
 
         private Products GetFromSource()
