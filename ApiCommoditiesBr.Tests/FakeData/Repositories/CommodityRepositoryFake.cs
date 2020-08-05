@@ -16,11 +16,6 @@ namespace ApiCommoditiesBr.Tests.FakeData.Repositories
         }
         public Products Get()
         {
-            return GetFromSource();
-        }
-
-        private Products GetFromSource()
-        {
             return _commodityService.GetFromSource(_filePath);
         }
     }

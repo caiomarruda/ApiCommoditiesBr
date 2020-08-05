@@ -1,6 +1,5 @@
 using ApiCommoditiesBr.Core.Interfaces;
 using ApiCommoditiesBr.Tests.FakeData.Repositories;
-using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.IO;
 using Xunit;
