@@ -50,7 +50,7 @@ namespace ApiCommoditiesBr.Tests
 
         private static string MakeMockFilePath(string file)
         {
-            return Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName, $"Mock\\{ file }");
+            return Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.Parent.FullName, "Mock", file);
         }
     }
 }
