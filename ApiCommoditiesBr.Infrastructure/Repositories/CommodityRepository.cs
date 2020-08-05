@@ -27,17 +27,17 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
 
         public Products Get()
         {
+            var retProducts = new Products();
+
             if (_cacheEnabled)
             {
-                _ = new Products();
-
-                Products retProducts = GetInMemoryCache<Products>(cacheIndexName);
+                retProducts = GetInMemoryCache<Products>(cacheIndexName);
 
                 if (retProducts == null)
                     return SetInMemoryCache(GetFromSource(), cacheIndexName, _cacheTtl);
             }
             
-            return GetFromSource();
+            return retProducts ?? GetFromSource();
         }
 
         private Products GetFromSource()
