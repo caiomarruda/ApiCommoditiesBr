@@ -18,7 +18,7 @@ namespace ApiCommoditiesBr.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get()
+        public ActionResult<Products> Get()
         {
             try
             {
