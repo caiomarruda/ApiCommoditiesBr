@@ -33,6 +33,7 @@ namespace ApiCommoditiesBr.Tests
         }
 
         [Fact]
+        [UseCulture("pt-BR")]
         public void Commodity_Get_Error_InvalidContent()
         {
             try
