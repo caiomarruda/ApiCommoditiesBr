@@ -1,7 +1,9 @@
 ﻿using ApiCommoditiesBr.Core.Interfaces;
 using ApiCommoditiesBr.Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiCommoditiesBr.Controllers
 {
@@ -16,18 +18,25 @@ namespace ApiCommoditiesBr.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public ActionResult<IEnumerable<Product>> Get()
         {
             try
             {
-                return _commodityRepository.Get();
-            }
-            catch (System.Exception ex)
-            {
-                BadRequest();
-            }
+                return Ok(new Notification
+                {
+                    Success = true,
+                    Data = _commodityRepository.Get()
+            });
 
-            return null;
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new Notification
+                {
+                    Success = false,
+                    Errors = ex.Message
+                });
+            }
         }
     }
 }

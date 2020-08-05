@@ -1,24 +1,37 @@
 ﻿using ApiCommoditiesBr.Core.Interfaces;
 using ApiCommoditiesBr.Core.Models;
 using HtmlAgilityPack;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace ApiCommoditiesBr.Infrastructure.Repositories
 {
-    public class CommodityRepository : ICommodityRepository
+    public class CommodityRepository : BaseRepository, ICommodityRepository
     {
         private CultureInfo _culture = CultureInfo.GetCultureInfo("pt-BR");
+        private static readonly string cacheIndexName = "commodities";
         private readonly IConfiguration _configuration;
 
-        public CommodityRepository(IConfiguration configuration)
+        public CommodityRepository(IConfiguration configuration, IMemoryCache memoryCache) : base(memoryCache)
         {
             _configuration = configuration;
         }
 
         public IEnumerable<Product> Get()
+        {
+            var retValues = GetInMemoryCache<List<Product>>(cacheIndexName);
+
+            if (retValues == null)
+                return SetInMemoryCache(GetFromSource(), cacheIndexName);
+
+            return retValues;
+        }
+
+        private List<Product> GetFromSource()
         {
             var htmlDocument = new HtmlWeb();
             var url = htmlDocument.Load(_configuration["CommoditiesUrl"]);
