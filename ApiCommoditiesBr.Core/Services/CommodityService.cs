@@ -3,7 +3,6 @@ using ApiCommoditiesBr.Core.Models;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ApiCommoditiesBr.Core.Services
 {
