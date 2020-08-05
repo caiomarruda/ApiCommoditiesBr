@@ -6,17 +6,17 @@ Esta API foi desenvolvida no formato REST e têm como objetivo converter os dado
 
 ## Observações
 + Esta aplicação é independente e não têm qualquer vínculo com a instituição CEPEA USP.
-+ A Aplicação têm como objetivo apenas traduzir os dados obtidos do widget gerado no site CEPEA USP para o formato de exibição em JSON.
-+ Esta aplicação destina-se apenas a estudos e o seu uso é de total responsabilidade do usuário.
++ A aplicação têm apenas como objetivo converter os dados obtidos do widget gerado no site CEPEA USP para o formato de exibição em JSON.
++ Esta aplicação destina-se apenas para fins de estudos e o seu uso é de total responsabilidade do usuário.
 
 
 ## Configuração
 Para configurar, basta inserir a URL que está dentro do embeded gerado no site do CEPEA (https://www.cepea.esalq.usp.br/br/widget.aspx) no parâmetro CommoditiesUrl em appSettings.config .
 
 ## Projetos Open Source utilizados
-HtmlAgilityPack by zzzProjects
+HtmlAgilityPack por zzzProjects
 
-TimeZoneConverter by mj1856
+TimeZoneConverter por mj1856
 
 ## Licença de Uso
 [MIT](https://choosealicense.com/licenses/mit/)
