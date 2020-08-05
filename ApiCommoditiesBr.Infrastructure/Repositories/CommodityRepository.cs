@@ -49,11 +49,11 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
 
                 lstProducts.Add(new Product
                 {
-                    Index = spanItems[0].InnerText,
-                    Price = Convert.ToDecimal(tdItems[2].InnerText.Split(" ")[1], _culture),
-                    Date = Convert.ToDateTime(tdItems[0].InnerText, _culture),
-                    Unit = spanItems[1].InnerText,
-                    Currency = tdItems[2].InnerText.Split(" ")[0]
+                    Index = spanItems[0].InnerText.Trim(),
+                    Price = Convert.ToDecimal(tdItems[2].InnerText.Trim().Split(" ")[1], _culture),
+                    Date = Convert.ToDateTime(tdItems[0].InnerText.Trim(), _culture),
+                    Unit = spanItems[1].InnerText.Trim(),
+                    Currency = tdItems[2].InnerText.Trim().Split(" ")[0]
                 });
             }
 
