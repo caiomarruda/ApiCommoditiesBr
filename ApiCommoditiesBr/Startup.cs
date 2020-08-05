@@ -1,4 +1,5 @@
 using ApiCommoditiesBr.Core.Interfaces;
+using ApiCommoditiesBr.Core.Services;
 using ApiCommoditiesBr.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +25,7 @@ namespace ApiCommoditiesBr
             services.AddMemoryCache();
 
             services.AddSingleton<ICommodityRepository, CommodityRepository>();
+            services.AddSingleton<ICommodityService, CommodityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
