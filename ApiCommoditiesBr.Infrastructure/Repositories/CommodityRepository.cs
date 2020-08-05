@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
+using TimeZoneConverter;
 
 namespace ApiCommoditiesBr.Infrastructure.Repositories
 {
@@ -73,7 +74,8 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
         {
             try
             {
-                newDate = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(date, TimeZoneInfo.Local.Id, "E. South America Standard Time");  
+                TimeZoneInfo tzi = TZConvert.GetTimeZoneInfo("E. South America Standard Time");
+                newDate = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(date, TimeZoneInfo.Local.Id, tzi.Id);  
             }
             catch (TimeZoneNotFoundException)
             {
