@@ -5,8 +5,6 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Threading.Tasks;
 using TimeZoneConverter;
 
 namespace ApiCommoditiesBr.Infrastructure.Repositories
@@ -70,7 +68,7 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
         }
 
         //TODO: move this to Helper
-        private void ConvertDateToLocalDateTime(DateTime date, out DateTime newDate)
+        private static void ConvertDateToLocalDateTime(DateTime date, out DateTime newDate)
         {
             try
             {
