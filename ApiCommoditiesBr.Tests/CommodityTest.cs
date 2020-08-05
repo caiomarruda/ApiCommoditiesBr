@@ -10,18 +10,18 @@ namespace ApiCommoditiesBr.Tests
     public class CommodotyTest
     {
         private ICommodityRepository _commodityRepository;
-        private readonly IMemoryCache _memoryCache;
 
         public CommodotyTest()
         {
         }
      
         [Fact]
+        [UseCulture("pt-BR")]
         public void Commodity_Get_Success()
         {
             try
             {
-                _commodityRepository = new CommodityRepositoryFake(_memoryCache, MakeMockFilePath("commodityResultSuccess.html"));
+                _commodityRepository = new CommodityRepositoryFake(MakeMockFilePath("commodityResultSuccess.html"));
 
                 var result = _commodityRepository.Get();
                 Assert.NotNull(result);
@@ -37,7 +37,7 @@ namespace ApiCommoditiesBr.Tests
         {
             try
             {
-                _commodityRepository = new CommodityRepositoryFake(_memoryCache, MakeMockFilePath("commodityResultError.html"));
+                _commodityRepository = new CommodityRepositoryFake(MakeMockFilePath("commodityResultError.html"));
 
                 var result = _commodityRepository.Get();
                 Assert.Null(result); 
