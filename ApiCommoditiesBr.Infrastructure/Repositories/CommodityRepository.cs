@@ -12,7 +12,6 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
 {
     public class CommodityRepository : BaseRepository, ICommodityRepository
     {
-        private CultureInfo _culture = CultureInfo.GetCultureInfo("pt-BR");
         private static readonly string cacheIndexName = "commodities";
         private readonly IConfiguration _configuration;
 
@@ -37,9 +36,11 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
             var url = htmlDocument.Load(_configuration["CommoditiesUrl"]);
 
             var lstProducts = new List<ProductItem>();
+            ConvertDateToLocalDateTime(DateTime.Now, out DateTime dateNow);
+
             var products = new Products
             {
-                LastUpdate = DateTime.Now
+                LastUpdate = dateNow
             };
 
             var table = url.DocumentNode.SelectSingleNode("//table[@class=\"imagenet-widget-tabela\"]");
@@ -55,8 +56,8 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
                 lstProducts.Add(new ProductItem
                 {
                     Index = spanItems[0].InnerText.Trim(),
-                    Price = Convert.ToDecimal(tdItems[2].InnerText.Trim().Split(" ")[1], _culture),
-                    Date = Convert.ToDateTime(tdItems[0].InnerText.Trim(), _culture),
+                    Price = Convert.ToDecimal(tdItems[2].InnerText.Trim().Split(" ")[1]),
+                    Date = Convert.ToDateTime(tdItems[0].InnerText.Trim()),
                     Unit = spanItems[1].InnerText.Trim(),
                     Currency = tdItems[2].InnerText.Trim().Split(" ")[0]
                 });
@@ -65,6 +66,19 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
             products.Product = lstProducts;
 
             return products;
+        }
+
+        //TODO: move this to Helper
+        private void ConvertDateToLocalDateTime(DateTime date, out DateTime newDate)
+        {
+            try
+            {
+                newDate = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(date, TimeZoneInfo.Local.Id, "E. South America Standard Time");  
+            }
+            catch (TimeZoneNotFoundException)
+            {
+                throw;
+            }
         }
     }
 }
