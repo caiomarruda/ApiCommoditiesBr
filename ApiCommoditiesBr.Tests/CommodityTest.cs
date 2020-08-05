@@ -40,7 +40,7 @@ namespace ApiCommoditiesBr.Tests
                 _commodityRepository = new CommodityRepositoryFake(_memoryCache, MakeMockFilePath("commodityResultError.html"));
 
                 var result = _commodityRepository.Get();
-                Assert.Null(result);
+                Assert.Null(result); 
             }
             catch (Exception)
             {
