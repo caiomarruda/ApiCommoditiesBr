@@ -21,9 +21,9 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
             _configuration = configuration;
         }
 
-        public IEnumerable<Product> Get()
+        public Products Get()
         {
-            var retValues = GetInMemoryCache<List<Product>>(cacheIndexName);
+            var retValues = GetInMemoryCache<Products>(cacheIndexName);
 
             if (retValues == null)
                 return SetInMemoryCache(GetFromSource(), cacheIndexName);
@@ -31,12 +31,17 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
             return retValues;
         }
 
-        private List<Product> GetFromSource()
+        private Products GetFromSource()
         {
             var htmlDocument = new HtmlWeb();
             var url = htmlDocument.Load(_configuration["CommoditiesUrl"]);
 
-            var lstProducts = new List<Product>();
+            var lstProducts = new List<ProductItem>();
+            var products = new Products
+            {
+                LastUpdate = DateTime.Now
+            };
+
             var table = url.DocumentNode.SelectSingleNode("//table[@class=\"imagenet-widget-tabela\"]");
             var tableHead = table.SelectNodes("tbody");
             var tableRows = tableHead[0].SelectNodes("tr");
@@ -47,7 +52,7 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
                 Console.WriteLine();
                 var spanItems = tdItems[1].SelectNodes("span");
 
-                lstProducts.Add(new Product
+                lstProducts.Add(new ProductItem
                 {
                     Index = spanItems[0].InnerText.Trim(),
                     Price = Convert.ToDecimal(tdItems[2].InnerText.Trim().Split(" ")[1], _culture),
@@ -57,7 +62,9 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
                 });
             }
 
-            return lstProducts;
+            products.Product = lstProducts;
+
+            return products;
         }
     }
 }

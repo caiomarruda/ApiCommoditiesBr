@@ -1,8 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ApiCommoditiesBr.Core.Models
 {
-    public class Product
+    public class Products
+    {
+        public DateTime LastUpdate { get; set; }
+        public List<ProductItem> Product { get; set; }
+    }
+
+    public class ProductItem
     {
         public string Index { get; set; }
         public string Unit { get; set; }
