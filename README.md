@@ -11,7 +11,7 @@ Esta API foi desenvolvida no formato REST e têm como objetivo converter os dado
 
 
 ## Configuração
-Para configurar, basta inserir a URL que está dentro do código embeded gerado no site do CEPEA (https://www.cepea.esalq.usp.br/br/widget.aspx), no parâmetro CommoditiesUrl em appSettings.config .
+Para configurar, basta copiar a URL que está dentro do código embeded gerado no site do CEPEA (https://www.cepea.esalq.usp.br/br/widget.aspx), no parâmetro CommoditiesUrl em appSettings.config .
 
 ## Projetos Open Source utilizados
 HtmlAgilityPack por zzzProjects
