@@ -1,38 +1,36 @@
 ﻿using ApiCommoditiesBr.Core.Interfaces;
 using ApiCommoditiesBr.Core.Models;
+using ApiCommoditiesBr.Infrastructure.Repositories;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Text;
 using TimeZoneConverter;
 
-namespace ApiCommoditiesBr.Infrastructure.Repositories
+namespace ApiCommoditiesBr.Tests.FakeData.Repositories
 {
-    public class CommodityRepository : BaseRepository, ICommodityRepository
+    public class CommodityRepositoryFake : BaseRepository, ICommodityRepository
     {
-        private static readonly string cacheIndexName = "commodities";
-        private readonly IConfiguration _configuration;
 
-        public CommodityRepository(IConfiguration configuration, IMemoryCache memoryCache) : base(memoryCache)
+        private CultureInfo _culture = CultureInfo.GetCultureInfo("pt-BR");
+        private static string _filePath;
+
+        public CommodityRepositoryFake(IMemoryCache memoryCache, string filePath) : base(memoryCache)
         {
-            _configuration = configuration;
+            _filePath = filePath;
         }
-
         public Products Get()
         {
-            var retValues = GetInMemoryCache<Products>(cacheIndexName);
-
-            if (retValues == null)
-                return SetInMemoryCache(GetFromSource(), cacheIndexName);
-
-            return retValues;
+            return GetFromSource();
         }
 
         private Products GetFromSource()
         {
             var htmlWeb = new HtmlWeb();
-            var url = htmlWeb.Load(_configuration["CommoditiesUrl"]);
+            var url = htmlWeb.Load(_filePath);
 
             var lstProducts = new List<ProductItem>();
             ConvertDateToLocalDateTime(DateTime.Now, out DateTime dateNow);
@@ -55,8 +53,8 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
                 lstProducts.Add(new ProductItem
                 {
                     Index = spanItems[0].InnerText.Trim(),
-                    Price = Convert.ToDecimal(tdItems[2].InnerText.Trim().Split(" ")[1]),
-                    Date = Convert.ToDateTime(tdItems[0].InnerText.Trim()),
+                    Price = Convert.ToDecimal(tdItems[2].InnerText.Trim().Split(" ")[1], _culture),
+                    Date = Convert.ToDateTime(tdItems[0].InnerText.Trim(), _culture),
                     Unit = spanItems[1].InnerText.Trim(),
                     Currency = tdItems[2].InnerText.Trim().Split(" ")[0]
                 });
@@ -73,7 +71,7 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
             try
             {
                 TimeZoneInfo tzi = TZConvert.GetTimeZoneInfo("E. South America Standard Time");
-                newDate = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(date, TimeZoneInfo.Local.Id, tzi.Id);  
+                newDate = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(date, TimeZoneInfo.Local.Id, tzi.Id);
             }
             catch (TimeZoneNotFoundException)
             {
