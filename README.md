@@ -7,7 +7,7 @@ Esta API foi desenvolvida no formato REST e têm como objetivo converter os dado
 ## Observações
 + Esta aplicação é independente e não têm qualquer vínculo com a instituição CEPEA USP.
 + A Aplicação têm como objetivo apenas traduzir os dados obtidos do widget gerado no site CEPEA USP para o formato de exibição em JSON.
-+ Esta dessa aplicação destina-se apenas a estudos e o seu uso é de total responsabilidade do usuário.
++ Esta aplicação destina-se apenas a estudos e o seu uso é de total responsabilidade do usuário.
 
 
 ## Configuração
