@@ -8,6 +8,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["ApiCommoditiesBr/ApiCommoditiesBr.csproj", "ApiCommoditiesBr/"]
+COPY ["ApiCommoditiesBr.Core/ApiCommoditiesBr.Core.csproj", "ApiCommoditiesBr.Core/"]
+COPY ["ApiCommoditiesBr.Infrastructure/ApiCommoditiesBr.Infrastructure.csproj", "ApiCommoditiesBr.Infrastructure/"]
+COPY ["ApiCommoditiesBr.Helper/ApiCommoditiesBr.Helper.csproj", "ApiCommoditiesBr.Helper/"]
 RUN dotnet restore "ApiCommoditiesBr/ApiCommoditiesBr.csproj"
 COPY . .
 WORKDIR "/src/ApiCommoditiesBr"
