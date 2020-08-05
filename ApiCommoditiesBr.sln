@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiCommoditiesBr.Core", "Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiCommoditiesBr.Infrastructure", "ApiCommoditiesBr.Infrastructure\ApiCommoditiesBr.Infrastructure.csproj", "{44E8A60D-E0EF-4FA9-9938-2C622934A7CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiCommoditiesBr.Tests", "ApiCommoditiesBr.Tests\ApiCommoditiesBr.Tests.csproj", "{76784B17-5E14-4C25-AF5F-A7B665514F38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiCommoditiesBr.Tests", "ApiCommoditiesBr.Tests\ApiCommoditiesBr.Tests.csproj", "{76784B17-5E14-4C25-AF5F-A7B665514F38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiCommoditiesBr.Helper", "ApiCommoditiesBr.Helper\ApiCommoditiesBr.Helper.csproj", "{A506272E-04D8-4F1D-A9BD-265015CF8B41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{76784B17-5E14-4C25-AF5F-A7B665514F38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76784B17-5E14-4C25-AF5F-A7B665514F38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76784B17-5E14-4C25-AF5F-A7B665514F38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A506272E-04D8-4F1D-A9BD-265015CF8B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A506272E-04D8-4F1D-A9BD-265015CF8B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A506272E-04D8-4F1D-A9BD-265015CF8B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A506272E-04D8-4F1D-A9BD-265015CF8B41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,6 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using TimeZoneConverter;
 
 namespace ApiCommoditiesBr.Infrastructure.Repositories
 {
@@ -37,7 +36,7 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
             var url = htmlWeb.Load(_filePath);
 
             var lstProducts = new List<ProductItem>();
-            ConvertDateToLocalDateTime(DateTime.Now, out DateTime dateNow);
+            Helper.DateTimeHelper.ConvertDateToLocalDateTime(DateTime.Now, out DateTime dateNow);
 
             var products = new Products
             {
@@ -67,20 +66,6 @@ namespace ApiCommoditiesBr.Infrastructure.Repositories
             products.Product = lstProducts;
 
             return products;
-        }
-
-        //TODO: move this to Helper
-        private static void ConvertDateToLocalDateTime(DateTime date, out DateTime newDate)
-        {
-            try
-            {
-                TimeZoneInfo tzi = TZConvert.GetTimeZoneInfo("E. South America Standard Time");
-                newDate = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(date, TimeZoneInfo.Local.Id, tzi.Id);  
-            }
-            catch (TimeZoneNotFoundException)
-            {
-                throw;
-            }
         }
     }
 }

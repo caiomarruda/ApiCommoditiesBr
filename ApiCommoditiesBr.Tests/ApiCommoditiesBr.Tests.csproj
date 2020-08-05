@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiCommoditiesBr.Core\ApiCommoditiesBr.Core.csproj" />
+    <ProjectReference Include="..\ApiCommoditiesBr.Helper\ApiCommoditiesBr.Helper.csproj" />
     <ProjectReference Include="..\ApiCommoditiesBr.Infrastructure\ApiCommoditiesBr.Infrastructure.csproj" />
   </ItemGroup>
 

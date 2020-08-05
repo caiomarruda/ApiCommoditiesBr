@@ -8,11 +8,11 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
     <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.6" />
-    <PackageReference Include="TimeZoneConverter" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ApiCommoditiesBr.Core\ApiCommoditiesBr.Core.csproj" />
+    <ProjectReference Include="..\ApiCommoditiesBr.Helper\ApiCommoditiesBr.Helper.csproj" />
   </ItemGroup>
 
 </Project>
