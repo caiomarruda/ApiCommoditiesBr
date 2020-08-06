@@ -2,7 +2,7 @@
 ![.NET Core](https://github.com/caiomarruda/ApiCommoditiesBr/workflows/.NET%20Core/badge.svg)
 
 ## Sobre
-Esta API foi desenvolvida no formato REST e têm como objetivo converter os dados de Indicadores de Commodities do site CEPEA USP (cepea.esalq.usp.br) para o formato de exibição em JSON, obtidos através da url widget gerada no site.
+Esta API foi desenvolvida no formato REST e têm como objetivo converter os dados de Indicadores de Commodities do site CEPEA USP (cepea.esalq.usp.br) para o formato de exibição em JSON, obtidos através da url widget gerada no site. 
 
 ## Observações
 + Esta aplicação é independente e não têm qualquer vínculo com a instituição CEPEA USP.
